@@ -25,6 +25,8 @@ jobs:
             ~/.gradle/caches/
             ~/.gradle/wrapper/
           key: cache-gradle
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - name: Run Gradle tasks
         run: ./gradlew build check --continue
       - name: Stop Gradle
