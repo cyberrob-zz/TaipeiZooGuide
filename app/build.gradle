@@ -45,28 +45,12 @@ android {
         }
     }
 
-    signingConfigs {
-        debug {
-            keyAlias 'NotSoSecurePwd'
-            keyPassword 'NotSoSecurePwd'
-            storeFile file('../keys/debug.jks')
-            storePassword 'NotSoSecurePwd'
-        }
-        production {
-            keyAlias 'NotSoSecurePwd'
-            keyPassword 'NotSoSecurePwd'
-            storeFile file('../keys/prod.jks')
-            storePassword 'NotSoSecurePwd'
-        }
-    }
-
     buildTypes {
         debug {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
             debuggable true
-            signingConfig signingConfigs.debug
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->
                     println "It\'s ${output.baseName}-${versionName}"
@@ -80,7 +64,6 @@ android {
             shrinkResources false
             zipAlignEnabled false
             debuggable false
-            signingConfig signingConfigs.production
             proguardFiles fileTree(dir: './proguard', includes: ['*.pro']).asList().toArray()
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->

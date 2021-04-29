@@ -240,3 +240,4 @@ common/src/main/assets/**/*.lic
 # End of https://www.gitignore.io/api/kotlin,android,androidstudio
 .idea/runConfigurations.xml
 /.idea/misc.xml
+/.idea/codeStyles/codeStyleConfig.xml
