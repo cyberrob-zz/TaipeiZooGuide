@@ -20,7 +20,8 @@ data class Response<out T>(val status: ApiStatus, val data: T?, val message: Str
 
 class ResponseHandler {
     fun <T : Any> handleSuccess(data: T): Response<T> {
-        return Response.success(data)
+        return if (data is BaseQueryResult && data.results.isEmpty()) Response.empty(data)
+        else Response.success(data)
     }
 
     fun <T : Any> handleException(code: Int): Response<T> {

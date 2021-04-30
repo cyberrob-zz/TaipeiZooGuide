@@ -1,8 +1,8 @@
 package com.wang.taipeizooguide.di
 
-import com.wang.taipeizooguide.data.remote.ZoomRepository
+import com.wang.taipeizooguide.data.remote.ArboretumRepository
 import org.koin.dsl.module
 
 val arboretumModule = module {
-    factory { ZoomRepository(get()) }
+    factory { ArboretumRepository(get(), get()) }
 }

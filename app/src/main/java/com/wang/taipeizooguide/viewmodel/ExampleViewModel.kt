@@ -1,27 +1,36 @@
 package com.wang.taipeizooguide.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.wang.taipeizooguide.data.model.QueryParam
-import com.wang.taipeizooguide.data.model.ZooQueryResult
-import com.wang.taipeizooguide.data.remote.ZoomRepository
-import kotlinx.coroutines.Dispatchers
+import com.wang.taipeizooguide.data.remote.ArboretumRepository
+import com.wang.taipeizooguide.data.remote.Response
+import com.wang.taipeizooguide.data.remote.ZooRepository
 
-class ExampleViewModel(private val zooRepository: ZoomRepository) : ViewModel() {
+class ExampleViewModel(
+    private val zooRepository: ZooRepository,
+    private val arboretumRepository: ArboretumRepository
+) : ViewModel() {
 
-    var queryParam: QueryParam? = null
-
-    val zoomList: LiveData<ZooQueryResult> = liveData(Dispatchers.IO) {
-        emit(Resource.)
+    fun getZooList(queryParam: QueryParam) = liveData {
+        emit(Response.loading(null))
         emit(
-            zooRepository.getZoomList(
-                queryString = queryParam?.query,
-                limit = queryParam?.limit,
-                offset = queryParam?.offset
+            zooRepository.getZooList(
+                queryString = queryParam.query,
+                limit = queryParam.limit,
+                offset = queryParam.offset
             )
         )
     }
 
-
+    fun getArboretumList(queryParam: QueryParam) = liveData {
+        emit(Response.loading(null))
+        emit(
+            arboretumRepository.getArboretumList(
+                queryString = queryParam.query,
+                limit = queryParam.limit,
+                offset = queryParam.offset
+            )
+        )
+    }
 }

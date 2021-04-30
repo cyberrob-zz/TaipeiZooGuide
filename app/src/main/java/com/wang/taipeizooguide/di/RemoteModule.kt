@@ -1,11 +1,9 @@
 package com.wang.taipeizooguide.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.orhanobut.logger.Logger
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wang.taipeizooguide.BuildConfig
-import com.wang.taipeizooguide.data.model.HTTP_TRAFFIC
 import com.wang.taipeizooguide.data.remote.OpenDataApi
 import com.wang.taipeizooguide.data.remote.ResponseHandler
 import okhttp3.OkHttpClient
@@ -52,12 +50,12 @@ fun provideInterceptor(): HttpLoggingInterceptor {
             interceptor.apply { level = HttpLoggingInterceptor.Level.NONE }
         }
         else -> {
-            val interceptor = HttpLoggingInterceptor(
-                object : HttpLoggingInterceptor.Logger {
-                    override fun log(message: String) {
-                        Logger.t(HTTP_TRAFFIC).d(message)
-                    }
-                })
+            val interceptor = HttpLoggingInterceptor()
+//                object : HttpLoggingInterceptor.Logger {
+//                    override fun log(message: String) {
+//                        Logger.t(HTTP_TRAFFIC).d(message)
+//                    }
+//                })
 
             interceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
         }

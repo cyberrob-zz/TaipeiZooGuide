@@ -34,25 +34,25 @@ android {
         dev {
             applicationId "${basePkgName}.dev"
             dimension "version"
-            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset\""
+            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset/\""
         }
         
         alpha {
             applicationId "${basePkgName}.alpha"
             dimension "version"
-            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset\""
+            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset/\""
         }
 
         beta {
             applicationId "${basePkgName}.beta"
             dimension "version"
-            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset\""
+            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset/\""
         }
 
         production {
             applicationId "${basePkgName}"
             dimension "version"
-            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset\""
+            buildConfigField "String", "API_URL", "\"https://data.taipei/api/v1/dataset/\""
         }
     }
 

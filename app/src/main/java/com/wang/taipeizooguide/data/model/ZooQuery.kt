@@ -3,19 +3,17 @@ package com.wang.taipeizooguide.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class ZooQuery(
     val result: ZooQueryResult
-) : Parcelable
+)
 
-@Parcelize
 data class ZooQueryResult(
-    val count: Int,
-    val limit: Int,
-    val offset: Int,
-    val sort: String,
-    val results: List<Zoo>
-) : Parcelable
+    override val count: Int,
+    override val limit: Int,
+    override val offset: Int,
+    override val sort: String,
+    override val results: List<Zoo>
+) : BaseQueryResult(count, limit, offset, sort, results)
 
 @Parcelize
 data class Zoo(
