@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui.dashboard
+package com.wang.taipeizooguide.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

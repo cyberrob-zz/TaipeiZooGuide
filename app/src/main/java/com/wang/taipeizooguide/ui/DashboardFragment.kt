@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui.dashboard
+package com.wang.taipeizooguide.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.wang.taipeizooguide.R
+import com.wang.taipeizooguide.viewmodel.DashboardViewModel
 
 class DashboardFragment : Fragment() {
 
