@@ -46,6 +46,6 @@ data class Arboretum(
     val F_pdf01_URL: String,
     val F_pdf02_ALT: String,
     val F_pdf02_URL: String,
+//    val F_Name_Ch: String,
     val _id: Int
-//    val F_Name_Ch: String
 )

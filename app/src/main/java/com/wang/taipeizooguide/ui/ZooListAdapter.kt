@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.wang.taipeizooguide.R
 import com.wang.taipeizooguide.data.model.Zoo
-import kotlinx.android.synthetic.main.layout_adapter_zoo_list.view.*
+import kotlinx.android.synthetic.main.layout_recycler_view_adapter.view.*
 
 typealias ZooClickListener = (Zoo) -> Unit
 
@@ -27,13 +27,13 @@ class ZooListAdapter : PagingDataAdapter<Zoo, ZooListAdapter.ViewHolder>(ZooDiff
 
     override fun onBindViewHolder(holder: ZooListAdapter.ViewHolder, position: Int) {
         getItem(position)?.let { zooAtPosition ->
-            holder.itemView.zoo_name.text = "${zooAtPosition.E_Name} | ${zooAtPosition.E_Category}"
-            holder.itemView.zoo_memo.text =
+            holder.itemView.item_name.text = "${zooAtPosition.E_Name} | ${zooAtPosition.E_Category}"
+            holder.itemView.item_memo.text =
                 if (zooAtPosition.E_Memo.isNotEmpty()) zooAtPosition.E_Memo else "N/A"
-            Glide.with(holder.itemView.zoo_image)
+            Glide.with(holder.itemView.preview_image)
                 .load(zooAtPosition.E_Pic_URL)
                 .apply(RequestOptions().centerCrop())
-                .into(holder.itemView.zoo_image)
+                .into(holder.itemView.preview_image)
 
             holder.itemView.setOnClickListener { _zooClickListener?.invoke(zooAtPosition) }
         }
@@ -42,7 +42,7 @@ class ZooListAdapter : PagingDataAdapter<Zoo, ZooListAdapter.ViewHolder>(ZooDiff
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZooListAdapter.ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_adapter_zoo_list, parent, false)
+                .inflate(R.layout.layout_recycler_view_adapter, parent, false)
         )
     }
 

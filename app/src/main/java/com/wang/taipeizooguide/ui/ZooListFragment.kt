@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orhanobut.logger.Logger
 import com.wang.taipeizooguide.R
+import com.wang.taipeizooguide.ui.AttractionInfoFragment.Companion.BUNDLE_ATTRACTION
 import com.wang.taipeizooguide.viewmodel.ZooViewModel
 import kotlinx.android.synthetic.main.fragment_zoo_list.*
 import kotlinx.coroutines.flow.collect
@@ -26,7 +29,6 @@ class ZooListFragment : Fragment() {
     private val zooViewModel: ZooViewModel by viewModel()
 
     private lateinit var zooListAdapter: ZooListAdapter
-
 
     private fun setupView() {
         zooListAdapter = ZooListAdapter().apply {
@@ -82,7 +84,14 @@ class ZooListFragment : Fragment() {
     }
 
     private fun getZooClickListener(): ZooClickListener = { zoo ->
-        Logger.d("Clicked zoo: $zoo")
+        view?.run safeView@{
+            Navigation.findNavController(this@safeView)
+                .navigate(
+                    R.id.action_navigation_zoo_to_attraction_page, bundleOf(
+                        BUNDLE_ATTRACTION to zoo
+                    )
+                )
+        }
     }
 
     override fun onCreateView(
@@ -105,15 +114,5 @@ class ZooListFragment : Fragment() {
                 }
             }
         }
-
-//        exampleViewModel.getZooList(queryParam = QueryParam(limit = 10))
-//            .observe(viewLifecycleOwner, {
-//                Logger.d(it)
-//            })
-//
-//        exampleViewModel.getArboretumList(queryParam = QueryParam(limit = 5))
-//            .observe(viewLifecycleOwner, {
-//                Logger.d(it)
-//            })
     }
 }
