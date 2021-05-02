@@ -12,18 +12,30 @@ import com.wang.taipeizooguide.R
 import com.wang.taipeizooguide.data.model.Zoo
 import kotlinx.android.synthetic.main.layout_adapter_zoo_list.view.*
 
+typealias ZooClickListener = (Zoo) -> Unit
+
 class ZooListAdapter : PagingDataAdapter<Zoo, ZooListAdapter.ViewHolder>(ZooDifferentiator) {
+
+    private var _zooClickListener: ZooClickListener? = null
+    var zooClickListener
+        get() = _zooClickListener
+        set(listener) {
+            _zooClickListener = listener
+        }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: ZooListAdapter.ViewHolder, position: Int) {
-        getItem(position)?.let {
-            holder.itemView.zoo_name.text = it.E_Name
+        getItem(position)?.let { zooAtPosition ->
+            holder.itemView.zoo_name.text = "${zooAtPosition.E_Name} | ${zooAtPosition.E_Category}"
+            holder.itemView.zoo_memo.text =
+                if (zooAtPosition.E_Memo.isNotEmpty()) zooAtPosition.E_Memo else "N/A"
             Glide.with(holder.itemView.zoo_image)
-                .load(it.E_Pic_URL)
-                //.transform(BlurTransformation(holder.itemView.context))
+                .load(zooAtPosition.E_Pic_URL)
                 .apply(RequestOptions().centerCrop())
                 .into(holder.itemView.zoo_image)
+
+            holder.itemView.setOnClickListener { _zooClickListener?.invoke(zooAtPosition) }
         }
     }
 

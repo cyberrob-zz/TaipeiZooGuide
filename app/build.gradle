@@ -121,6 +121,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$ANDROIDX_NAVIGATION"
     implementation "androidx.navigation:navigation-ui-ktx:$ANDROIDX_NAVIGATION"
     implementation "androidx.recyclerview:recyclerview:$ANDROIDX_APPCOMPAT"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 
     implementation "org.koin:koin-androidx-scope:$KOIN_VERSION"
     implementation "org.koin:koin-androidx-viewmodel:$KOIN_VERSION"

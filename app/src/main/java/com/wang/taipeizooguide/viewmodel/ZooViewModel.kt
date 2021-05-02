@@ -3,6 +3,7 @@ package com.wang.taipeizooguide.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
+import com.orhanobut.logger.Logger
 import com.wang.taipeizooguide.data.model.Zoo
 import com.wang.taipeizooguide.data.model.ZooQueryResult
 import com.wang.taipeizooguide.data.remote.ZooRepository
@@ -27,18 +28,22 @@ class ZooViewModel(private val zooRepository: ZooRepository) : ViewModel() {
 
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Zoo> {
             return try {
-                val currentPageKey = params.key ?: 1
+                val currentPageKey = params.key ?: 0
+                Logger.d("currentPageKey: $currentPageKey")
+                val currentOffset = if (currentPageKey == 0) 0 else currentPageKey * ITEM_PER_PAGE
+                Logger.d("currentOffset: $currentOffset")
+
                 val response = zooRepository.getZooList(
                     queryString = null,
                     limit = ITEM_PER_PAGE,
-                    offset = if (currentPageKey == 1) 0 else currentPageKey * ITEM_PER_PAGE
+                    offset = currentOffset
                 )
                 val data = response.data ?: emptyList<Zoo>()
                 val responseData = mutableListOf<Zoo>().apply {
                     addAll((data as ZooQueryResult).results)
                 }
 
-                val prevKey = if (currentPageKey == 1) null else currentPageKey - 1
+                val prevKey = if (currentPageKey == 0) null else currentPageKey - 1
 
                 LoadResult.Page(
                     data = responseData,

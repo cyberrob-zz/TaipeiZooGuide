@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.orhanobut.logger.Logger
 import com.wang.taipeizooguide.R
 import com.wang.taipeizooguide.viewmodel.ZooViewModel
 import kotlinx.android.synthetic.main.fragment_zoo_list.*
@@ -27,7 +29,25 @@ class ZooListFragment : Fragment() {
 
 
     private fun setupView() {
-        zooListAdapter = ZooListAdapter()
+        zooListAdapter = ZooListAdapter().apply {
+            zooClickListener = getZooClickListener()
+            addLoadStateListener { loadState ->
+                when (loadState.refresh) {
+                    is LoadState.NotLoading -> {
+                        if (swipeRefreshLayout.isRefreshing) {
+                            swipeRefreshLayout.isRefreshing = false
+                        }
+                    }
+                    LoadState.Loading -> {
+                        Logger.d("Loading...")
+                    }
+                    is LoadState.Error -> {
+                        Logger.e("Error occurred: ${loadState.refresh.javaClass}")
+                    }
+                }
+            }
+        }
+        swipeRefreshLayout.setOnRefreshListener { zooListAdapter.refresh() }
         val linearLayoutManager = LinearLayoutManager(context)
         zoo_recycler_view.apply {
             layoutManager = linearLayoutManager
@@ -59,6 +79,10 @@ class ZooListFragment : Fragment() {
                 this@apply.addItemDecoration(this@dividerDecorator)
             }
         }
+    }
+
+    private fun getZooClickListener(): ZooClickListener = { zoo ->
+        Logger.d("Clicked zoo: $zoo")
     }
 
     override fun onCreateView(
