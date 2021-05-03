@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:scrollbars="none"
-    tools:context=".ui.AttractionInfoFragment">
+    tools:context=".ui.fragment.AttractionInfoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

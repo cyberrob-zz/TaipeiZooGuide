@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_zoo"
-        android:name="com.wang.taipeizooguide.ui.ZooListFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.ZooListFragment"
         android:label="@string/title_zoo"
         tools:layout="@layout/fragment_zoo_list">
         <action
@@ -19,18 +19,18 @@
 
     <fragment
         android:id="@+id/navigation_arboretum"
-        android:name="com.wang.taipeizooguide.ui.ArboretumListFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.ArboretumListFragment"
         android:label="@string/title_arboretum"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_about"
-        android:name="com.wang.taipeizooguide.ui.NotificationsFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.NotificationsFragment"
         android:label="@string/title_about"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/attraction_page"
-        android:name="com.wang.taipeizooguide.ui.AttractionInfoFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.AttractionInfoFragment"
         tools:layout="@layout/fragment_attraction_info" />
 </navigation>

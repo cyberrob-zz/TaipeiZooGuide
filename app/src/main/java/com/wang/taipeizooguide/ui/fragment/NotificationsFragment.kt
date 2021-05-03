@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui
+package com.wang.taipeizooguide.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
