@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_data">No Data Yet</string>
+    <string name="text_loading">Loading…</string>
+    <string name="text_error_occurred">"Error occurred. "</string>
+</resources>

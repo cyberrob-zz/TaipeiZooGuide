@@ -1,5 +1,9 @@
 package com.wang.taipeizooguide.data.model
 
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
+
 data class ArboretumQuery(
     val result: ArboretumQueryResult
 )
@@ -12,6 +16,7 @@ data class ArboretumQueryResult(
     override val results: List<Arboretum>
 ) : BaseQueryResult(count, limit, offset, sort, results)
 
+@Parcelize
 data class Arboretum(
     val F_AlsoKnown: String,
     val F_Brief: String,
@@ -46,6 +51,10 @@ data class Arboretum(
     val F_pdf01_URL: String,
     val F_pdf02_ALT: String,
     val F_pdf02_URL: String,
+    @Json(name = "F_Function＆Application")
+    val F_Function_Application: String,
+// TODO: 2021/5/3 NOT a valid key
+//    @Json(name="F_Name_Ch")
 //    val F_Name_Ch: String,
     val _id: Int
-)
+) : Parcelable

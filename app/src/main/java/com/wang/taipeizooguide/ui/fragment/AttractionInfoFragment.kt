@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui
+package com.wang.taipeizooguide.ui.fragment
 
 import android.content.Intent
 import android.graphics.Rect
@@ -9,9 +9,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,6 +24,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.orhanobut.logger.Logger
 import com.wang.taipeizooguide.R
 import com.wang.taipeizooguide.data.model.Zoo
+import com.wang.taipeizooguide.ui.adapter.ArboretumClickListener
+import com.wang.taipeizooguide.ui.adapter.ArboretumListAdapter
+import com.wang.taipeizooguide.ui.fragment.ArboretumInfoFragment.Companion.BUNDLE_ARBORETUM
 import com.wang.taipeizooguide.viewmodel.AttractionInfoViewModel
 import kotlinx.android.synthetic.main.fragment_attraction_info.*
 import kotlinx.android.synthetic.main.fragment_zoo_list.*
@@ -56,10 +61,14 @@ class AttractionInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getBundleDataFromArgument()
         setupBackPressCallback()
         setupView()
+        refreshArboretumAPI()
+    }
 
+    private fun refreshArboretumAPI() {
         lifecycleScope.launch {
             viewModel.arboretumList.collect {
                 if (::arboretumAdapter.isInitialized) {
@@ -76,6 +85,7 @@ class AttractionInfoFragment : Fragment() {
 
             Glide.with(attraction_image)
                 .load(it.E_Pic_URL)
+                .error(R.drawable.ic_baseline_link_24)
                 .apply(RequestOptions().centerCrop())
                 .into(attraction_image)
 
@@ -89,31 +99,31 @@ class AttractionInfoFragment : Fragment() {
                     is LoadState.NotLoading -> {
                         Logger.d("Not Loading...")
                         if (this.itemCount == 0) {
-                            arboretum_placeholder_view.visibility = View.VISIBLE
-                            on_site_arboretum_list.visibility = View.GONE
-                            arboretum_placeholder_view.text = getString(R.string.no_data)
+                            arboretum_placeholder_view?.visibility = View.VISIBLE
+                            on_site_arboretum_list?.visibility = View.GONE
+                            arboretum_placeholder_view?.text = getString(R.string.no_data)
                         } else {
-                            arboretum_placeholder_view.visibility = View.GONE
-                            on_site_arboretum_list.visibility = View.VISIBLE
+                            arboretum_placeholder_view?.visibility = View.GONE
+                            on_site_arboretum_list?.visibility = View.VISIBLE
                         }
                     }
                     LoadState.Loading -> {
                         Logger.d("Loading...")
-                        arboretum_placeholder_view.visibility = View.VISIBLE
-                        on_site_arboretum_list.visibility = View.GONE
-                        arboretum_placeholder_view.text = getString(R.string.text_loading)
+                        arboretum_placeholder_view?.visibility = View.VISIBLE
+                        on_site_arboretum_list?.visibility = View.GONE
+                        arboretum_placeholder_view?.text = getString(R.string.text_loading)
                     }
                     is LoadState.Error -> {
                         Logger.e("Error occurred: ${(loadState.refresh as LoadState.Error).error}")
-                        arboretum_placeholder_view.visibility = View.VISIBLE
-                        on_site_arboretum_list.visibility = View.GONE
-                        arboretum_placeholder_view.text = getString(R.string.text_error_occurred)
+                        arboretum_placeholder_view?.visibility = View.VISIBLE
+                        on_site_arboretum_list?.visibility = View.GONE
+                        arboretum_placeholder_view?.text = getString(R.string.text_error_occurred)
                     }
                 }
             }
         }
         val linearLayoutManager = LinearLayoutManager(context)
-        on_site_arboretum_list.apply {
+        on_site_arboretum_list?.apply {
             layoutManager = linearLayoutManager
             if (::arboretumAdapter.isInitialized) {
                 adapter = arboretumAdapter
@@ -148,14 +158,14 @@ class AttractionInfoFragment : Fragment() {
         Logger.d("on_site_arboretum_list height: ${on_site_arboretum_list.measuredHeight}")
     }
 
-    private fun getArboretumClickListener(): ArboretumClickListener = { araboretum ->
+    private fun getArboretumClickListener(): ArboretumClickListener = { arboretum ->
         view?.run safeView@{
-//            Navigation.findNavController(this@safeView)
-//                .navigate(
-//                    R.id.action_navigation_zoo_to_attraction_page, bundleOf(
-//                        BUNDLE_ATTRACTION to zoo
-//                    )
-//                )
+            Navigation.findNavController(this@safeView)
+                .navigate(
+                    R.id.action_attraction_page_to_arboretum_info, bundleOf(
+                        BUNDLE_ARBORETUM to arboretum
+                    )
+                )
         }
     }
 
@@ -171,12 +181,17 @@ class AttractionInfoFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Logger.d("itemId == android.R.di.home: ${item.itemId == android.R.id.home}")
+
         return if (item.itemId == R.id.navigation_attraction_link) {
             viewModel.targetZooAttraction?.run {
                 startActivity(
                     Intent(Intent.ACTION_VIEW, Uri.parse(this.E_URL))
                 )
             }
+            true
+        } else if (item.itemId == android.R.id.home) {
+            Navigation.findNavController(this@AttractionInfoFragment.requireView()).navigateUp()
             true
         } else {
             super.onOptionsItemSelected(item)

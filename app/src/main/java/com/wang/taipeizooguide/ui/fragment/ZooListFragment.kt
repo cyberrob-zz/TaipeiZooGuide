@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui
+package com.wang.taipeizooguide.ui.fragment
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orhanobut.logger.Logger
 import com.wang.taipeizooguide.R
-import com.wang.taipeizooguide.ui.AttractionInfoFragment.Companion.BUNDLE_ATTRACTION
+import com.wang.taipeizooguide.ui.adapter.ZooClickListener
+import com.wang.taipeizooguide.ui.adapter.ZooListAdapter
+import com.wang.taipeizooguide.ui.fragment.AttractionInfoFragment.Companion.BUNDLE_ATTRACTION
 import com.wang.taipeizooguide.viewmodel.ZooViewModel
 import kotlinx.android.synthetic.main.fragment_zoo_list.*
 import kotlinx.coroutines.flow.collect

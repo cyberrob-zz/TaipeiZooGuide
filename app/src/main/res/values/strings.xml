@@ -8,5 +8,10 @@
     <string name="attraction_link">Link</string>
     <string name="no_data">No Data Yet</string>
     <string name="text_loading">Loading…</string>
-    <string name="text_error_occurred">"Error occurred."</string>
+    <string name="text_error_occurred">Error occurred</string>
+    <string name="arboretum_info">Arboretum Info</string>
+    <string name="text_alias">Alias</string>
+    <string name="text_brief">Intro</string>
+    <string name="text_feature">How to find</string>
+    <string name="text_function_application">Function/Application</string>
 </resources>

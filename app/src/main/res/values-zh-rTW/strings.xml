@@ -8,5 +8,10 @@
     <string name="attraction_link">連結</string>
     <string name="no_data">尚無資料</string>
     <string name="text_loading">載入中…</string>
-    <string name="text_error_occurred">"Error occurred. "</string>
+    <string name="text_error_occurred">發生錯誤</string>
+    <string name="arboretum_info">Arboretum Info</string>
+    <string name="text_alias">別名</string>
+    <string name="text_brief">簡介</string>
+    <string name="text_feature">辨識方式</string>
+    <string name="text_function_application">功能及應用</string>
 </resources>

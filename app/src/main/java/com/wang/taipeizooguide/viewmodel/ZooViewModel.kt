@@ -21,28 +21,30 @@ class ZooViewModel(private val zooRepository: ZooRepository) : BaseViewModel() {
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Zoo> {
             return try {
                 val currentPageKey = params.key ?: 0
-                Logger.d("currentPageKey: $currentPageKey")
+
                 val currentOffset = if (currentPageKey == 0) 0 else currentPageKey * ITEM_PER_PAGE
-                Logger.d("currentOffset: $currentOffset")
 
                 val response = zooRepository.getZooList(
                     queryString = null,
                     limit = ITEM_PER_PAGE,
                     offset = currentOffset
                 )
-                val data = response.data ?: emptyList<Zoo>()
-                val responseData = mutableListOf<Zoo>().apply {
-                    addAll((data as ZooQueryResult).results)
-                }
+
+                val responseData =
+                    if ((response.data as? ZooQueryResult)?.results.isNullOrEmpty()) listOf<Zoo>()
+                    else (response.data as? ZooQueryResult)?.results ?: listOf()
 
                 val prevKey = if (currentPageKey == 0) null else currentPageKey - 1
+
+                val nextKey = if (responseData.isNullOrEmpty()) null else currentPageKey + 1
 
                 LoadResult.Page(
                     data = responseData,
                     prevKey = prevKey,
-                    nextKey = currentPageKey.plus(1)
+                    nextKey = nextKey
                 )
             } catch (e: Exception) {
+                Logger.e(e.toString())
                 LoadResult.Error(e)
             }
         }

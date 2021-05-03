@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui
+package com.wang.taipeizooguide.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

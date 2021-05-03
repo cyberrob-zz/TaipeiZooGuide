@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/container_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/container_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:lineSpacingMultiplier="1.3"
+        android:textSize="16sp"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Pretium vulputate sapien nec sagittis aliquam malesuada. Penatibus et magnis dis parturient montes nascetur. Adipiscing commodo elit at imperdiet dui accumsan sit. Gravida neque convallis a cras. Ut consequat semper viverra nam libero justo laoreet. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque. Eget lorem dolor sed viverra ipsum nunc. Viverra mauris in aliquam sem fringilla. Nulla pharetra diam sit amet. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus. Non enim praesent elementum facilisis leo. Eget mi proin sed libero enim sed faucibus turpis in. Egestas sed tempus urna et pharetra." />
+
+
+</LinearLayout>

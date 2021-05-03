@@ -7,30 +7,46 @@
 
     <fragment
         android:id="@+id/navigation_zoo"
-        android:name="com.wang.taipeizooguide.ui.ZooListFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.ZooListFragment"
         android:label="@string/title_zoo"
         tools:layout="@layout/fragment_zoo_list">
         <action
             android:id="@+id/action_navigation_zoo_to_attraction_page"
             app:destination="@id/attraction_page"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/navigation_zoo"
             app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_arboretum"
-        android:name="com.wang.taipeizooguide.ui.ArboretumListFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.ArboretumListFragment"
         android:label="@string/title_arboretum"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_about"
-        android:name="com.wang.taipeizooguide.ui.NotificationsFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.NotificationsFragment"
         android:label="@string/title_about"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/attraction_page"
-        android:name="com.wang.taipeizooguide.ui.AttractionInfoFragment"
-        tools:layout="@layout/fragment_attraction_info" />
+        android:name="com.wang.taipeizooguide.ui.fragment.AttractionInfoFragment"
+        tools:layout="@layout/fragment_attraction_info">
+        <action
+            android:id="@+id/action_attraction_page_to_arboretum_info"
+            app:destination="@id/arboretum_info"
+            app:popUpTo="@id/attraction_page"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/arboretum_info"
+        android:name="com.wang.taipeizooguide.ui.fragment.ArboretumInfoFragment"
+        android:label="@string/arboretum_info"
+        tools:layout="@layout/fragment_arboretum_info" />
 </navigation>
