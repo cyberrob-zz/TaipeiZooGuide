@@ -1,5 +1,6 @@
 package com.wang.taipeizooguide.di
 
+import com.wang.taipeizooguide.ui.fragment.ArboretumInfoViewModel
 import com.wang.taipeizooguide.viewmodel.ArboretumViewModel
 import com.wang.taipeizooguide.viewmodel.AttractionInfoViewModel
 import com.wang.taipeizooguide.viewmodel.ExampleViewModel
@@ -12,4 +13,5 @@ val viewModelModule = module {
     factory { ArboretumViewModel(get()) }
 
     factory { AttractionInfoViewModel(get()) }
+    factory { ArboretumInfoViewModel() }
 }
