@@ -87,6 +87,7 @@ class AttractionInfoFragment : Fragment() {
                 .load(it.E_Pic_URL)
                 .error(R.drawable.ic_baseline_link_24)
                 .apply(RequestOptions().centerCrop())
+                .error(R.drawable.ic_pixeltrue_error)
                 .into(attraction_image)
 
             attraction_info.text = it.E_Info

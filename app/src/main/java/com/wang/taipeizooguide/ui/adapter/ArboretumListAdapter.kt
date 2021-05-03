@@ -34,6 +34,7 @@ class ArboretumListAdapter :
             Glide.with(holder.itemView.preview_image)
                 .load(arboretumAtPosition.F_Pic01_URL)
                 .apply(RequestOptions().centerCrop())
+                .error(R.drawable.ic_pixeltrue_error)
                 .into(holder.itemView.preview_image)
 
             holder.itemView.setOnClickListener { _arboretumClickListener?.invoke(arboretumAtPosition) }

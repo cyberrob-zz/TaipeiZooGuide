@@ -33,6 +33,7 @@ class ZooListAdapter : PagingDataAdapter<Zoo, ZooListAdapter.ViewHolder>(ZooDiff
             Glide.with(holder.itemView.preview_image)
                 .load(zooAtPosition.E_Pic_URL)
                 .apply(RequestOptions().centerCrop())
+                .error(R.drawable.ic_pixeltrue_error)
                 .into(holder.itemView.preview_image)
 
             holder.itemView.setOnClickListener { _zooClickListener?.invoke(zooAtPosition) }

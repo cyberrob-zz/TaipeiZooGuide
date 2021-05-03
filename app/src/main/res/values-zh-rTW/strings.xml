@@ -14,4 +14,7 @@
     <string name="text_brief">簡介</string>
     <string name="text_feature">辨識方式</string>
     <string name="text_function_application">功能及應用</string>
+    <string name="dialog_error_title">發生錯誤！</string>
+    <string name="dialog_error_message">請稍後重試</string>
+    <string name="text_ok">好的</string>
 </resources>

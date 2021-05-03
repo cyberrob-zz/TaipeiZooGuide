@@ -1,10 +1,6 @@
 package com.wang.taipeizooguide.di
 
-import com.wang.taipeizooguide.ui.fragment.ArboretumInfoViewModel
-import com.wang.taipeizooguide.viewmodel.ArboretumViewModel
-import com.wang.taipeizooguide.viewmodel.AttractionInfoViewModel
-import com.wang.taipeizooguide.viewmodel.ExampleViewModel
-import com.wang.taipeizooguide.viewmodel.ZooViewModel
+import com.wang.taipeizooguide.viewmodel.*
 import org.koin.dsl.module
 
 val viewModelModule = module {

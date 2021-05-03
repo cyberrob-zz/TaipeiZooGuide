@@ -1,7 +1,6 @@
-package com.wang.taipeizooguide.ui.fragment
+package com.wang.taipeizooguide.viewmodel
 
 import com.wang.taipeizooguide.R
-import com.wang.taipeizooguide.viewmodel.BaseViewModel
 
 class ArboretumInfoViewModel : BaseViewModel() {
     val classPropertyNameMap = mapOf<String, Int>(
