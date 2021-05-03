@@ -13,7 +13,6 @@ class AttractionInfoViewModel(private val arboretumRepository: ArboretumReposito
 
     var targetZooAttraction: Zoo? = null
 
-
     val arboretumList = Pager(PagingConfig(pageSize = ITEM_PER_PAGE)) {
         ArboretumDataSource(arboretumRepository)
     }.flow/*.liveData*/.cachedIn(viewModelScope)
@@ -27,28 +26,29 @@ class AttractionInfoViewModel(private val arboretumRepository: ArboretumReposito
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Arboretum> {
             return try {
                 val currentPageKey = params.key ?: 0
-                Logger.d("currentPageKey: $currentPageKey")
+
                 val currentOffset = if (currentPageKey == 0) 0 else currentPageKey * ITEM_PER_PAGE
-                Logger.d("currentOffset: $currentOffset")
 
                 val response = arboretumRepository.getArboretumList(
                     queryString = targetZooAttraction?.E_Name,
                     limit = ITEM_PER_PAGE,
                     offset = currentOffset
                 )
-                val data = response.data ?: emptyList<Arboretum>()
-                val responseData = mutableListOf<Arboretum>().apply {
-                    addAll((data as ArboretumQueryResult).results)
-                }
+
+                val responseData =
+                    ((response.data as? ArboretumQueryResult)?.results) ?: listOf()
 
                 val prevKey = if (currentPageKey == 0) null else currentPageKey - 1
+
+                val nextKey = if (responseData.isNullOrEmpty()) null else currentPageKey + 1
 
                 LoadResult.Page(
                     data = responseData,
                     prevKey = prevKey,
-                    nextKey = currentPageKey.plus(1)
+                    nextKey = nextKey
                 )
             } catch (e: Exception) {
+                Logger.e(e.toString())
                 LoadResult.Error(e)
             }
         }
