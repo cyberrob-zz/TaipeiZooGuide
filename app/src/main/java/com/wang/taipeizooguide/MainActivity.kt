@@ -33,12 +33,17 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Logger.d("destination is in bottomNavIds: ${destination.id in bottomNavIds}")
+            handleActionBar(destination.id in bottomNavIds)
             handleBottomNav(destination.id in bottomNavIds)
         }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+    }
+
+    private fun handleActionBar(shouldHideSubtitle: Boolean) {
+        supportActionBar?.subtitle = if (shouldHideSubtitle) "" else supportActionBar?.subtitle
     }
 
     private fun handleBottomNav(shouldShowBottomNav: Boolean) {
@@ -48,11 +53,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return false
     }
-
-    override fun onResume() {
-        super.onResume()
-        supportActionBar?.subtitle = ""
-    }
-
-
+    
 }
