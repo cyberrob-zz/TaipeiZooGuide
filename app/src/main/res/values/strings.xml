@@ -14,4 +14,7 @@
     <string name="text_brief">Intro</string>
     <string name="text_feature">How to find</string>
     <string name="text_function_application">Function/Application</string>
+    <string name="dialog_error_title">Error occurred</string>
+    <string name="dialog_error_message">Please try again later.</string>
+    <string name="text_ok">Ok</string>
 </resources>

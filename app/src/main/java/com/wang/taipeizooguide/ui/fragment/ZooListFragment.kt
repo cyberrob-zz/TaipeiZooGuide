@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -32,6 +33,39 @@ class ZooListFragment : Fragment() {
 
     private lateinit var zooListAdapter: ZooListAdapter
 
+    private var dialog: AlertDialog? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_zoo_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupView()
+
+        refreshZooAPI()
+    }
+
+    override fun onDestroyView() {
+        dialog = null
+        super.onDestroyView()
+    }
+
+    private fun refreshZooAPI() {
+        lifecycleScope.launch {
+            zooViewModel.zooList.collect {
+                if (::zooListAdapter.isInitialized) {
+                    zooListAdapter.submitData(it)
+                }
+            }
+        }
+    }
+
     private fun setupView() {
         zooListAdapter = ZooListAdapter().apply {
             zooClickListener = getZooClickListener()
@@ -44,9 +78,21 @@ class ZooListFragment : Fragment() {
                     }
                     LoadState.Loading -> {
                         Logger.d("Loading...")
+                        if (swipeRefreshLayout?.isRefreshing == false) {
+                            swipeRefreshLayout?.isRefreshing = true
+                        }
                     }
                     is LoadState.Error -> {
                         Logger.e("Error occurred: ${loadState.refresh.javaClass}")
+                        dialog = AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.dialog_error_title)
+                            .setMessage(R.string.dialog_error_message)
+                            .setPositiveButton(
+                                R.string.text_ok
+                            ) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
                     }
                 }
             }
@@ -93,28 +139,6 @@ class ZooListFragment : Fragment() {
                         BUNDLE_ATTRACTION to zoo
                     )
                 )
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_zoo_list, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setupView()
-
-        lifecycleScope.launch {
-            zooViewModel.zooList.collect {
-                if (::zooListAdapter.isInitialized) {
-                    zooListAdapter.submitData(it)
-                }
-            }
         }
     }
 }

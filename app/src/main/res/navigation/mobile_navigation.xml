@@ -25,13 +25,13 @@
         android:id="@+id/navigation_arboretum"
         android:name="com.wang.taipeizooguide.ui.fragment.ArboretumListFragment"
         android:label="@string/title_arboretum"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_arboretum_list" />
 
     <fragment
         android:id="@+id/navigation_about"
-        android:name="com.wang.taipeizooguide.ui.fragment.NotificationsFragment"
+        android:name="com.wang.taipeizooguide.ui.fragment.AboutFragment"
         android:label="@string/title_about"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/attraction_page"

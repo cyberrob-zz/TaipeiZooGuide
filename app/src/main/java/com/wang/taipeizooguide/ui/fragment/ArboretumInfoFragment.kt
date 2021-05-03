@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -13,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.wang.taipeizooguide.R
 import com.wang.taipeizooguide.data.model.Arboretum
 import com.wang.taipeizooguide.ui.view.TitleDescriptionView
+import com.wang.taipeizooguide.viewmodel.ArboretumInfoViewModel
 import kotlinx.android.synthetic.main.fragment_arboretum_info.*
 import kotlinx.android.synthetic.main.layout_recycler_view_adapter.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,6 +29,8 @@ class ArboretumInfoFragment : Fragment() {
 
     private val viewModel: ArboretumInfoViewModel by viewModel()
 
+    private var dialog: AlertDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -37,6 +41,11 @@ class ArboretumInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_arboretum_info, container, false)
+    }
+
+    override fun onDestroyView() {
+        dialog = null
+        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,6 +75,7 @@ class ArboretumInfoFragment : Fragment() {
         Glide.with(arboretum_image)
             .load(arboretum.F_Pic01_URL)
             .apply(RequestOptions().centerCrop())
+            .error(R.drawable.ic_pixeltrue_error)
             .into(arboretum_image)
 
         arboretum_name_zh?.text = arboretum.F_Name_En
