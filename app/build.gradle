@@ -109,6 +109,7 @@ dependencies {
     final RETROFIT_VERSION = '2.9.0'
     final MOSHI_VERSION = '1.12.0'
     final PAGING_VERSION = "3.0.0-rc01"
+    final MARKWON_VERSION = "4.6.2"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
@@ -158,7 +159,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:18.0.3'
     implementation 'com.google.firebase:firebase-crashlytics:17.4.1'
 
-
+    implementation "io.noties.markwon:core:$MARKWON_VERSION"
 
     // Test
     testImplementation 'junit:junit:4.13.2'
