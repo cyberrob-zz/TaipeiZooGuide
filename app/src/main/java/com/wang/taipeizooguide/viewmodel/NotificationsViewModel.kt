@@ -1,4 +1,4 @@
-package com.wang.taipeizooguide.ui.notifications
+package com.wang.taipeizooguide.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

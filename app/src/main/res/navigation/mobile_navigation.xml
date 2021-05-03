@@ -3,23 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_zoo">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.wang.taipeizooguide.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_zoo"
+        android:name="com.wang.taipeizooguide.ui.ZooListFragment"
+        android:label="@string/title_zoo"
+        tools:layout="@layout/fragment_zoo_list">
+        <action
+            android:id="@+id/action_navigation_zoo_to_attraction_page"
+            app:destination="@id/attraction_page"
+            app:popUpTo="@id/navigation_zoo"
+            app:popUpToInclusive="false" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.wang.taipeizooguide.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_arboretum"
+        android:name="com.wang.taipeizooguide.ui.ArboretumListFragment"
+        android:label="@string/title_arboretum"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.wang.taipeizooguide.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_about"
+        android:name="com.wang.taipeizooguide.ui.NotificationsFragment"
+        android:label="@string/title_about"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/attraction_page"
+        android:name="com.wang.taipeizooguide.ui.AttractionInfoFragment"
+        tools:layout="@layout/fragment_attraction_info" />
 </navigation>

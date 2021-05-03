@@ -4,7 +4,7 @@ import com.wang.taipeizooguide.data.model.ZooQueryResult
 import retrofit2.HttpException
 
 
-open class ZooRepository(
+class ZooRepository(
     private val openDataApi: OpenDataApi,
     private val responseHandler: ResponseHandler
 ) {

@@ -24,6 +24,5 @@ class ArboretumRepository(
         } catch (e: HttpException) {
             responseHandler.handleException(e.code())
         }
-
     }
 }

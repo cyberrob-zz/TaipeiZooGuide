@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">TaipeiZooGuide</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_zoo">Zoo</string>
+    <string name="title_arboretum">Arboretum</string>
+    <string name="title_about">About</string>
+
+    <string name="arboretum_in_attraction_site">Arboretum in the Attraction</string>
+    <string name="attraction_link">Link</string>
+    <string name="no_data">No Data Yet</string>
+    <string name="text_loading">Loading…</string>
+    <string name="text_error_occurred">"Error occurred."</string>
 </resources>
