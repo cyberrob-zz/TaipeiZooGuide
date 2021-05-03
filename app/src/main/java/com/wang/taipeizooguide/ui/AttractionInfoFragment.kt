@@ -88,14 +88,26 @@ class AttractionInfoFragment : Fragment() {
                 when (loadState.refresh) {
                     is LoadState.NotLoading -> {
                         Logger.d("Not Loading...")
-
+                        if (this.itemCount == 0) {
+                            arboretum_placeholder_view.visibility = View.VISIBLE
+                            on_site_arboretum_list.visibility = View.GONE
+                            arboretum_placeholder_view.text = getString(R.string.no_data)
+                        } else {
+                            arboretum_placeholder_view.visibility = View.GONE
+                            on_site_arboretum_list.visibility = View.VISIBLE
+                        }
                     }
                     LoadState.Loading -> {
                         Logger.d("Loading...")
-
+                        arboretum_placeholder_view.visibility = View.VISIBLE
+                        on_site_arboretum_list.visibility = View.GONE
+                        arboretum_placeholder_view.text = getString(R.string.text_loading)
                     }
                     is LoadState.Error -> {
                         Logger.e("Error occurred: ${(loadState.refresh as LoadState.Error).error}")
+                        arboretum_placeholder_view.visibility = View.VISIBLE
+                        on_site_arboretum_list.visibility = View.GONE
+                        arboretum_placeholder_view.text = getString(R.string.text_error_occurred)
                     }
                 }
             }

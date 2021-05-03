@@ -8,7 +8,7 @@ data class ZooQuery(
 )
 
 data class ZooQueryResult(
-    override val count: Int,
+    override val count: Int?,
     override val limit: Int,
     override val offset: Int,
     override val sort: String,
