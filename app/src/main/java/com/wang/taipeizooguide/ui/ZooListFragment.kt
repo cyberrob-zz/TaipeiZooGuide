@@ -36,8 +36,8 @@ class ZooListFragment : Fragment() {
             addLoadStateListener { loadState ->
                 when (loadState.refresh) {
                     is LoadState.NotLoading -> {
-                        if (swipeRefreshLayout.isRefreshing) {
-                            swipeRefreshLayout.isRefreshing = false
+                        if (swipeRefreshLayout?.isRefreshing == true) {
+                            swipeRefreshLayout?.isRefreshing = false
                         }
                     }
                     LoadState.Loading -> {
@@ -49,9 +49,9 @@ class ZooListFragment : Fragment() {
                 }
             }
         }
-        swipeRefreshLayout.setOnRefreshListener { zooListAdapter.refresh() }
+        swipeRefreshLayout?.setOnRefreshListener { zooListAdapter.refresh() }
         val linearLayoutManager = LinearLayoutManager(context)
-        zoo_recycler_view.apply {
+        zoo_recycler_view?.apply {
             layoutManager = linearLayoutManager
             if (::zooListAdapter.isInitialized) {
                 adapter = zooListAdapter
