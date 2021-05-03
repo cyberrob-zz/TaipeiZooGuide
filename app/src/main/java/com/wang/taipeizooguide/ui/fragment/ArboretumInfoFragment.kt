@@ -2,10 +2,12 @@ package com.wang.taipeizooguide.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.wang.taipeizooguide.R
@@ -25,6 +27,11 @@ class ArboretumInfoFragment : Fragment() {
 
     private val viewModel: ArboretumInfoViewModel by viewModel()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +45,14 @@ class ArboretumInfoFragment : Fragment() {
         getBundleDataFromArgument()?.also {
             populateArboretum(it)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            Navigation.findNavController(this@ArboretumInfoFragment.requireView()).navigateUp()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getBundleDataFromArgument(): Arboretum? {

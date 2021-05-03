@@ -61,10 +61,14 @@ class AttractionInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getBundleDataFromArgument()
         setupBackPressCallback()
         setupView()
+        refreshArboretumAPI()
+    }
 
+    private fun refreshArboretumAPI() {
         lifecycleScope.launch {
             viewModel.arboretumList.collect {
                 if (::arboretumAdapter.isInitialized) {
@@ -81,6 +85,7 @@ class AttractionInfoFragment : Fragment() {
 
             Glide.with(attraction_image)
                 .load(it.E_Pic_URL)
+                .error(R.drawable.ic_baseline_link_24)
                 .apply(RequestOptions().centerCrop())
                 .into(attraction_image)
 
@@ -176,12 +181,17 @@ class AttractionInfoFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Logger.d("itemId == android.R.di.home: ${item.itemId == android.R.id.home}")
+
         return if (item.itemId == R.id.navigation_attraction_link) {
             viewModel.targetZooAttraction?.run {
                 startActivity(
                     Intent(Intent.ACTION_VIEW, Uri.parse(this.E_URL))
                 )
             }
+            true
+        } else if (item.itemId == android.R.id.home) {
+            Navigation.findNavController(this@AttractionInfoFragment.requireView()).navigateUp()
             true
         } else {
             super.onOptionsItemSelected(item)

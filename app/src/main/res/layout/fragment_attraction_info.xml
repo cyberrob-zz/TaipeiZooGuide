@@ -22,12 +22,12 @@
             android:id="@+id/attraction_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.3"
+            android:lineSpacingMultiplier="1.5"
             android:minHeight="120dp"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textSize="16sp"
-            tools:text="Hello" />
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue. Felis eget velit aliquet sagittis id consectetur purus. Id diam maecenas ultricies mi eget. Quis risus sed vulputate odio ut enim blandit. Ipsum consequat nisl vel pretium lectus quam. In vitae turpis massa sed elementum tempus egestas sed sed. Tellus orci ac auctor augue mauris augue neque gravida. Vel turpis nunc eget lorem dolor sed viverra. Aliquet eget sit amet tellus cras adipiscing." />
 
         <TextView
             android:id="@+id/arboretum_in_attraction_site"
@@ -42,6 +42,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/on_site_arboretum_list"
             android:visibility="gone"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"

@@ -9,10 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
-
-typealias NavigationTargetListener = (Int) -> Boolean
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Logger.d("destination is in bottomNavIds: ${destination.id in bottomNavIds}")
             handleActionBar(destination.id in bottomNavIds)
             handleBottomNav(destination.id in bottomNavIds)
         }
