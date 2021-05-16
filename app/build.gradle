@@ -92,6 +92,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -173,4 +174,8 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3'
 
 
+    testImplementation 'io.mockk:mockk:1.9'
+    // provides "InstantTaskExecutorRule" to make sure the test env runs in the main thread
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "app.cash.turbine:turbine:0.2.1"
 }
